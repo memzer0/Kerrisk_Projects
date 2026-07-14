@@ -7,8 +7,8 @@ int copyFile(int srcfd,int destfd);
 
 int main(int argc, char* argv[]){
     
-    if(argc != 3){
-        puts("arguments should be 3");
+    if(argc == 1){
+        puts("arguments should be greater than 1");
         exit(EXIT_FAILURE);
     }
 
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
         perror("open src:");
         exit(EXIT_FAILURE);
     }
-
+    
     destfd = open(argv[2],O_RDWR | O_CREAT | O_TRUNC, MODE);
     if(destfd < 0){
         perror("open dest: ");
