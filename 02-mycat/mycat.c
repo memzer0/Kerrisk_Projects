@@ -4,17 +4,23 @@
 #include <fcntl.h>
 
 #define BUF_SZ          4096
+#define TRUE            1
 
 int main(int argc, char* argv[]){
-    if(argc == 1){
-        puts("need more than one argument");
-        exit(EXIT_SUCCESS);
-    }
-
     ssize_t n = 0;
     int fd = 0;
     char buffer[BUF_SZ];
-    
+
+    if(argc == 1){
+        while(TRUE){
+            //printf("\n");
+            n = read(STDIN_FILENO,buffer,BUF_SZ);
+            if(write(STDOUT_FILENO,buffer,n) != n)
+                perror("write");
+        }
+    }
+
+  
     for(int i = 1; i <= argc; i++){
         fd = open(argv[i],O_RDONLY);
         if(fd < 0){
